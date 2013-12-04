@@ -1,0 +1,1 @@
+./env/bin/python {{ project_name }}/manage.py shell_plus
