@@ -6,7 +6,7 @@ ADMIN_PASSWORD='ad2&min3'
 ADMIN_EMAIL='your_email@example.com'
 SITENAME="localhost:8000"
 PYTHON="env/bin/python"
-PROJECT="{{ project_name }}"
+PROJECT="bellmetric_reports"
 set -x
 # virtualenv
 if [ ! -d env ]; then

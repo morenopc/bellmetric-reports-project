@@ -1,1 +1,1 @@
-./env/bin/python {{ project_name }}/manage.py runserver
+./env/bin/python bellmetric_reports/manage.py runserver

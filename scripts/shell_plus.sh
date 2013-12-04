@@ -1,1 +1,1 @@
-./env/bin/python {{ project_name }}/manage.py shell_plus
+./env/bin/python bellmetric_reports/manage.py shell_plus
