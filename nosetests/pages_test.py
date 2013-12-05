@@ -37,9 +37,13 @@ class PagesTest(TestCase):
 
     def test_call_source(self):
         """Call source page is working ?"""
+        
+        cdr_set = Cdr.objects.all()
+
         answer = self.client.get(
-            '/report/call/%s/source/' % randrange(
-                Cdr.objects.all().count()))
+            '/report/call/%s/source/' % cdr_set[
+                randrange(cdr_set.count())].id
+        )
         self.assertEqual(answer.status_code, 200,
             msg='GET {} {}'.format(
                 '/report/call/(?P<cdr>\d+)/source/',
@@ -47,9 +51,13 @@ class PagesTest(TestCase):
 
     def test_campaign_update(self):
         """Campaign update page is working ?"""
+        
+        campaign_set = Campaign.objects.all()
+
         answer = self.client.get(
-            '/report/campaign/%s/update/' % randrange(
-                Campaign.objects.all().count()))
+            '/report/campaign/%s/update/' % campaign_set[
+                randrange(campaign_set.count())].id
+        )
         self.assertEqual(answer.status_code, 200,
             msg='GET {} {}'.format(
                 '/report/campaign/(?P<pk>\d+)/update/',
