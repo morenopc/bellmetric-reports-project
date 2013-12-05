@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.db.models import Q
 from django.views.generic import ListView, DetailView
 
 from .models import (
@@ -52,3 +53,39 @@ class SourceListView(ListView):
             cdr=self.kwargs.get('cdr'))
 
         return self.queryset
+
+
+class ReportsListView(ListView):
+    """
+        Task 4 Create a reporting page, where data from the CDR model
+        can be aggregated by various fields, e.g. show total calls and
+        total duration. Add the ability to filter by campaign and
+        source type through the source model.
+    """
+
+    model = Cdr
+    template_name_suffix = '_page'
+
+    def get(self, request, *args, **kwargs):
+        
+        self.object_list = self.get_queryset()
+
+        # Search
+        if request.GET.get('q'):
+            self.object_list = self.object_list.filter(
+                campaign__name__icontains=request.GET['q'])
+
+        # Campaign filter
+        if request.GET.get('c'):
+            self.object_list = self.object_list.filter(
+                campaign__id=request.GET['c'])
+
+        # Source type filter
+        if request.GET.get('t'):
+            cdrsourse_set = CdrSource.objects.filter(
+                source__source_type__id=request.GET['t'])
+            self.object_list = self.object_list.filter(
+                id__in=[obj.cdr.id for obj in cdrsourse_set])
+        
+        context = self.get_context_data(object_list=self.object_list)
+        return self.render_to_response(context)

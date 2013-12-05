@@ -67,6 +67,11 @@ class Cdr(models.Model):
     caller = models.CharField(max_length=255, blank=True)
     called = models.CharField(max_length=255, blank=True)
     call_duration = models.BigIntegerField(null=True, blank=True)
+    
+    def source(self):
+        """Call records source"""
+        return self.cdrsource_set.filter(cdr=self)
+
     class Meta:
         db_table = 'cdr'
 

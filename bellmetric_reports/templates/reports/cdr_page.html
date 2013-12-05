@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block page_title %}Reporting page{% endblock page_title %}
+
+{% block content %}
+<form method="get" class="form-search">
+  <input type="text" name="q" class="input-medium search-query" placeholder="Campaign">
+  <button type="submit" class="btn">Search</button>
+</form>
+{% for call in object_list %}
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>call start</th>
+      <th>campaign name</th>
+      <th>caller number</th>
+      <th>called number</th>
+      <th>call duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ call.id }}</td>
+      <td>{{ call.call_start }}</td>
+      <td><a href="?c={{ call.campaign.id }}">{{ call.campaign.name }}</a></td>
+      <td>{{ call.caller }}</td>
+      <td>{{ call.called }}</td>
+      <td>{{ call.call_duration }}</td>
+    </tr>
+  </tbody>
+</table>
+<table class="table table-bordered table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>id</th>
+      <th>visitor id</th>
+      <th>time</th>
+      <th>source type</th>
+      <th>url</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for object in call.source %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ object.source.id }}</td>
+      <td>{{ object.source.visitor_id }}</td>
+      <td>{{ object.source.time }}</td>
+      <td><a href="?t={{ object.source.source_type.id }}">{{ object.source.source_type.source_type }}</a></td>
+      <td><a href="{{ object.source.url }}">{{ object.source.url }}</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<br />
+{% endfor %}
+{% endblock content %}
