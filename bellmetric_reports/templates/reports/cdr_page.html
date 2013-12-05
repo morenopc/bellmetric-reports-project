@@ -23,7 +23,7 @@
     <tr>
       <td>{{ call.id }}</td>
       <td>{{ call.call_start }}</td>
-      <td><a href="?c={{ call.campaign.id }}">{{ call.campaign.name }}</a></td>
+      <td><a href="?c={{ call.campaign.id }}">{{ call.campaign.name }}</a> <a href="{% url 'reports:campaign-update' call.campaign.id %}"><i class="icon-edit"></i></a></td>
       <td>{{ call.caller }}</td>
       <td>{{ call.called }}</td>
       <td>{{ call.call_duration }}</td>

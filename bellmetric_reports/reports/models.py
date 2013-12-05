@@ -17,6 +17,9 @@ class Company(models.Model):
     class Meta:
         db_table = 'company'
 
+    def __unicode__(self):
+        return '%s' % (self.name)
+
 
 class Campaign(models.Model):
     id = models.BigIntegerField(primary_key=True)

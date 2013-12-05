@@ -103,4 +103,4 @@ class CampaignUpdateView(UpdateView):
     model = Campaign
     form_class = CampaignForm
     template_name = 'reports/campaign_update.html'
-    success_url = '/report/campaign/10/update/'
+    success_url = '/report/campaign/%(id)s/update/'
