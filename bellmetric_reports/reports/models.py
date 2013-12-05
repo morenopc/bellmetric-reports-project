@@ -74,3 +74,4 @@ class CdrSource(models.Model):
     source = models.ForeignKey('Source')
     class Meta:
         db_table = 'cdr_source'
+        ordering = ["source__time"]

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block page_title %}Call record source{% endblock page_title %}
+
+{% block content %}
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>id</th>
+      <th>visitor id</th>
+      <th>time</th>
+      <th>source type</th>
+      <th>url</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ object.source.id }}</td>
+      <td>{{ object.source.visitor_id }}</td>
+      <td>{{ object.source.time }}</td>
+      <td>{{ object.source.source_type.source_type }}</td>
+      <td><a href="{{ object.source.url }}">{{ object.source.url }}</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

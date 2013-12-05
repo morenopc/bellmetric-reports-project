@@ -2,8 +2,8 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from reports.models import (
-	Company, Campaign, SourceType, Source, Cdr, CdrSource)
+from .models import (
+    Company, Campaign, SourceType, Source, Cdr, CdrSource)
 
 
 class CompanyAdmin(admin.ModelAdmin):
