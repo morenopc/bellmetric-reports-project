@@ -1,10 +1,12 @@
 from __future__ import unicode_literals
 
 from django.db.models import Q
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic.edit import ModelFormMixin
 
 from .models import (
     Company, Campaign, SourceType, Source, Cdr, CdrSource)
+from .forms import CampaignForm
 
 
 class CallsListView(ListView):
@@ -89,3 +91,16 @@ class ReportsListView(ListView):
         
         context = self.get_context_data(object_list=self.object_list)
         return self.render_to_response(context)
+
+
+class CampaignUpdateView(UpdateView):
+    """
+        Task 5: Create a form for updating the campaign model's properties.
+        Describe how you would change this form to be submitted by AJAX
+        instead of HTTP POST.
+    """
+
+    model = Campaign
+    form_class = CampaignForm
+    template_name = 'reports/campaign_update.html'
+    success_url = '/report/campaign/10/update/'
