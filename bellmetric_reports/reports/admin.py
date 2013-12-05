@@ -36,7 +36,8 @@ admin.site.register(Source, SourceAdmin)
 
 class CdrAdmin(admin.ModelAdmin):
     """Cdr admin"""
-    pass
+    list_display = ('id', 'call_start', 'campaign',
+        'caller', 'called', 'call_duration')
 
 admin.site.register(Cdr, CdrAdmin)
 

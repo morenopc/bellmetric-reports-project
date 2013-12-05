@@ -39,6 +39,9 @@ class Campaign(models.Model):
     class Meta:
         db_table = 'campaign'
 
+    def __unicode__(self):
+        return '%s' % (self.name)
+
 
 class SourceType(models.Model):
     id = models.BigIntegerField(primary_key=True)
@@ -74,4 +77,4 @@ class CdrSource(models.Model):
     source = models.ForeignKey('Source')
     class Meta:
         db_table = 'cdr_source'
-        ordering = ["source__time"]
+        ordering = ['source__time']

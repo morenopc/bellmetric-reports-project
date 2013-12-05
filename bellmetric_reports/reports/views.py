@@ -15,6 +15,26 @@ class CallsListView(ListView):
 
     model = Cdr
 
+    def calls_order_by(self, **kwargs):
+        """
+            Task 3: Add option(s) for filtering and sorting the call list in
+            2(a) by call start date, call start time of day, campaign name,
+            caller number, called number and call duration.
+        """
+
+        filter_list = [
+            'call_start', 'campaign__name', 'caller', 'called', 'call_duration']
+
+        if kwargs.get('o') in filter_list:
+            self.queryset = self.model.objects.order_by(kwargs['o'])
+
+    def get(self, request, *args, **kwargs):
+
+        if request.GET.get('o'):
+            self.calls_order_by(o=request.GET['o'])
+
+        return super(CallsListView, self).get(request, *args, **kwargs)
+
 
 class SourceListView(ListView):
     """

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block page_title %}Call record source{% endblock page_title %}
+{% block page_title %}Call record{% if object_list.count > 0 %}s{% endif %} source{% endblock page_title %}
 
 {% block content %}
 <table class="table table-bordered table-hover">
