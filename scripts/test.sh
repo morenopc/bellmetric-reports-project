@@ -1,0 +1,1 @@
+./env/bin/python bellmetric_reports/manage.py test

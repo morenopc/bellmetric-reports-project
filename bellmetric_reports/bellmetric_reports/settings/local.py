@@ -54,6 +54,7 @@ CACHES = {
 # See: https://github.com/django-debug-toolbar/django-debug-toolbar#installation
 INSTALLED_APPS += (
     'django_extensions',
+    'django_nose',
     # 'debug_toolbar',
 )
 
@@ -71,3 +72,11 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TEMPLATE_CONTEXT': True,
 }
 ########## END TOOLBAR CONFIGURATION
+
+########## DJANGO-NOSE TESTs
+# See: https://github.com/jbalogh/django-nose
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = [
+    '--with-notify',
+    '--verbosity=2']
+########## END DJANGO-NOSE TESTs
