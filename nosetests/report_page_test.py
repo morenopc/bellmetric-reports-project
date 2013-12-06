@@ -1,3 +1,4 @@
+# -*- coding: UTF8 -*-
 from __future__ import unicode_literals
 
 from random import randrange
@@ -8,7 +9,11 @@ from django.test import TestCase
 from reports.models import CdrSource, Campaign
 
 class ReportPageTest(TestCase):
-    """Reporting page test"""
+    """
+        Task 7: Using Django’s unit testing framework, create tests
+        for the view created for Task 4. They should cover most of
+        the functionality but don’t need to be completely exhaustive.
+    """
 
     fixtures = ['reports']
 

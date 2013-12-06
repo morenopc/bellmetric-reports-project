@@ -4,6 +4,7 @@ from random import randrange
 
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.utils import simplejson
 
 from reports.models import Cdr, Campaign
 
@@ -36,7 +37,7 @@ class PagesTest(TestCase):
             msg='GET {} {}'.format('/report/calls/', answer.status_code))
 
     def test_call_source(self):
-        """Call source page is working ?"""
+        """Call source page is working?"""
         
         cdr_set = Cdr.objects.all()
 
@@ -50,7 +51,7 @@ class PagesTest(TestCase):
                 answer.status_code))
 
     def test_campaign_update(self):
-        """Campaign update page is working ?"""
+        """Campaign update page is working?"""
         
         campaign_set = Campaign.objects.all()
 
@@ -62,3 +63,11 @@ class PagesTest(TestCase):
             msg='GET {} {}'.format(
                 '/report/campaign/(?P<pk>\d+)/update/',
                 answer.status_code))
+
+    def test_task8_json(self):
+        """Task 8 view return json at '/report/calls/json/' ?"""
+
+        answer = self.client.get('/report/calls/json/')
+        self.assertEqual(answer.status_code, 200,
+            msg='GET {} {}'.format(
+                '/report/calls/json/', answer.status_code))

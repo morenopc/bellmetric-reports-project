@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, url
 
 from .views import (
-    CallsListView, SourceListView, ReportsListView, CampaignUpdateView)
+    CallsListView, SourceListView, ReportsListView, CampaignUpdateView,
+    cdr_records_json)
 
 urlpatterns = patterns('',
 
@@ -30,5 +31,11 @@ urlpatterns = patterns('',
         regex=r'^campaign/(?P<pk>\d+)/update/$',
         view=CampaignUpdateView.as_view(),
         name="campaign-update"
+    ),
+    # {% url "reports:calls-json" %}
+    url(
+        regex=r'^calls/json/$',
+        view=cdr_records_json,
+        name="calls-json"
     ),
 )

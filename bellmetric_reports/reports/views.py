@@ -1,6 +1,10 @@
+# -*- coding: UTF8 -*-
 from __future__ import unicode_literals
 
+from django.utils import simplejson
 from django.db.models import Q
+from django.http import HttpResponse
+from django.template.defaultfilters import date as _date
 from django.views.generic import ListView, DetailView, UpdateView
 from django.views.generic.edit import ModelFormMixin
 
@@ -104,3 +108,33 @@ class CampaignUpdateView(UpdateView):
     form_class = CampaignForm
     template_name = 'reports/campaign_update.html'
     success_url = '/report/campaign/%(id)s/update/'
+
+
+def cdr_records_json(request):
+    """
+        Task 8: Create a query with Django's ORM that retrieves:
+        All records from the cdr model ordered by call start,
+        and the latest source record of the call with a non­null
+        source type field (as ordered by the source record's time field).
+        Put this into a view ­ there's no need to create a template. You can
+        use database specific functionality if necessary.   
+    """
+
+    return HttpResponse(simplejson.dumps([
+        {
+            'id': cdr.id,
+            'call_start': _date(cdr.call_start, 'c'),
+            'campaign': cdr.campaign.name,
+            'caller': cdr.caller,
+            'called': cdr.called,
+            'call_duration': cdr.call_duration,
+            'source': [{
+                'id': cdrsource.source.id,
+                'visitor_id': cdrsource.source.visitor_id,
+                'time': _date(cdrsource.source.time, 'c'),
+                'source_type': cdrsource.source.source_type.source_type,
+                'url': cdrsource.source.url
+            } for cdrsource in cdr.source().order_by(
+                'source__time').exclude(source__source_type__isnull=True)]
+        } for cdr in Cdr.objects.all().order_by('call_start')
+    ], indent=2), mimetype='application/json; charset=utf8')
