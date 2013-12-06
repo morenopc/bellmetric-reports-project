@@ -30,7 +30,8 @@ class CallsListView(ListView):
         """
 
         filter_list = [
-            'call_start', 'campaign__name', 'caller', 'called', 'call_duration']
+            'call_start', 'campaign__name', 'caller',
+            'called', 'call_duration']
 
         if kwargs.get('o') in filter_list:
             self.queryset = self.model.objects.order_by(kwargs['o'])
@@ -73,7 +74,7 @@ class ReportsListView(ListView):
     template_name_suffix = '_page'
 
     def get(self, request, *args, **kwargs):
-        
+
         self.object_list = self.get_queryset()
 
         # Search
@@ -92,7 +93,7 @@ class ReportsListView(ListView):
                 source__source_type__id=request.GET['t'])
             self.object_list = self.object_list.filter(
                 id__in=[obj.cdr.id for obj in cdrsourse_set])
-        
+
         context = self.get_context_data(object_list=self.object_list)
         return self.render_to_response(context)
 
@@ -117,7 +118,7 @@ def cdr_records_json(request):
         and the latest source record of the call with a non­null
         source type field (as ordered by the source record's time field).
         Put this into a view ­ there's no need to create a template. You can
-        use database specific functionality if necessary.   
+        use database specific functionality if necessary.
     """
 
     return HttpResponse(simplejson.dumps([

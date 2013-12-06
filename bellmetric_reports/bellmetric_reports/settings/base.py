@@ -195,6 +195,7 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     # Database migration helpers:
     'south',
+    # Twitter-bootstrap form output for Django form:
     'bootstrapform',
 )
 
